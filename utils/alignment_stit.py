@@ -1,3 +1,4 @@
+
 import PIL
 import PIL.Image
 import dlib
@@ -151,7 +152,7 @@ def crop_faces(IMAGE_SIZE, files, scale, center_sigma=0.0, xy_sigma=0.0, use_fa=
     if use_fa:
         if fa == None:
             device = 'cuda' if torch.cuda.is_available() else 'cpu'
-            fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, flip_input=True, device=device)
+            fa = face_alignment.FaceAlignment(face_alignment.LandmarksType.TWO_D, flip_input=True, device=device)
         predictor = None
         detector = None
     else:
@@ -209,3 +210,4 @@ def calc_alignment_coefficients(pa, pb):
 
     res = np.dot(np.linalg.inv(a.T * a) * a.T, b)
     return np.array(res).reshape(8)
+    
